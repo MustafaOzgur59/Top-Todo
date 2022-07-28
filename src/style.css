@@ -1,0 +1,580 @@
+:root {
+  --btn-home-active: #4ade80;
+  --btn-menu-active: #89772f;
+  --btn-contact-active: #22d3ee;
+  --head-text: #fafafa;
+  --border-color: #222;
+  --background-even-more-light: #f7f7f7;
+  --background-light: rgb(239, 239, 238);
+  --background-dark: rgba(0, 0, 0, 0.9);
+  --background-dark-light: #333;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* overlay */
+
+.overlay {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.overlay-visible {
+  visibility: visible;
+}
+
+.details-overlay-card {
+  display: flex;
+  flex-direction: column;
+  width: 60rem;
+  padding: 3rem;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2rem 4rem rgb(0 0 0 / 60%);
+  box-shadow: 0 2rem 4rem rgb(0 0 0 / 60%);
+  color: #501f3a;
+  background-color: rgba(255, 255, 255, 0.82);
+  font-size: 2rem;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.close-detail {
+  align-self: flex-end;
+}
+
+.create-new-todo {
+  width: 50rem;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2rem 4rem rgb(0 0 0 / 60%);
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.create-new-todo-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  border-bottom: 1px solid #b9b9b9;
+  background-color: #c38d9e;
+  padding: 10px 20px;
+}
+
+.create-todo-date-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  padding: 10px 20px;
+}
+
+.create-todo-date-input {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #3ba395;
+  border-radius: 5px;
+  color: #3ba395;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: lato, sans-serif;
+}
+
+.create-new-todo textarea {
+  width: 100%;
+  color: #141414;
+  font-size: 1.6rem;
+  font-family: lato, sans-serif;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  padding: 10px 20px;
+}
+
+.create-todo-priority-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.create-todo-priority-div {
+  display: flex;
+  align-items: center;
+}
+
+.create-todo-priority-div button {
+  display: inline-block;
+  margin: 0 1.5rem 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.priority-low-button {
+  border: 1px solid green;
+  color: green;
+}
+.priority-medium-button {
+  border: 1px solid orange;
+  color: orange;
+}
+.priority-high-button {
+  border: 1px solid red;
+  color: red;
+}
+.priority-low-button:hover,
+.create-todo-add-button:hover {
+  background-color: green;
+}
+.priority-medium-button:hover {
+  background-color: orange;
+}
+.priority-high-button:hover {
+  background-color: red;
+}
+
+.priority-low-button.active {
+  background-color: green;
+  color: white;
+}
+.priority-medium-button.active {
+  background-color: orange;
+  color: white;
+}
+.priority-high-button.active {
+  background-color: red;
+  color: white;
+}
+
+.create-todo-priority-wrapper button:hover {
+  color: white;
+}
+
+.create-todo-add-button {
+  text-align: center;
+  align-self: center;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  border: 1px solid #3ba395;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #3ba395;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* overlay end */
+
+/* header */
+.header {
+  display: flex;
+  color: var(--head-text);
+  background-color: #f18081;
+  padding: 10px;
+}
+
+.header > .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  justify-self: center;
+}
+
+.header > .closeMenu {
+  width: 40px;
+  padding: 0;
+  font-size: 40px;
+  background-color: #f18081;
+}
+
+#closeMenuButton {
+  width: 40px;
+  padding: 0;
+  font-size: 40px;
+}
+
+.container {
+  height: calc(100vh - 89px - 44px);
+  display: flex;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: var(--background-light);
+  width: 300px;
+  min-width: 250px;
+  padding: 10px;
+  transition: all 300ms ease;
+}
+.sidebar.hidden {
+  display: none;
+}
+
+#mainProjects,
+#userProjects {
+  padding: 5px;
+  margin: 5px;
+}
+
+.default-project-button {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 5px;
+  background-color: transparent;
+  display: flex;
+  gap: 5px;
+}
+
+.user-project-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-button-left {
+  display: flex;
+  gap: 5px;
+}
+
+.project-button-right {
+  display: none;
+}
+
+.user-project-button:hover .project-button-right {
+  display: block;
+}
+
+.add-project-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  display: none;
+}
+
+.add-project-popup.active {
+  display: block;
+}
+
+.popup-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+input#add-project-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+#add-project {
+  background-color: #4ade80;
+}
+
+#cancel-add-project {
+  background-color: red;
+}
+
+#add-project,
+#cancel-add-project {
+  width: 40%;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+button,
+input {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+.add-project-button {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 5px;
+  background-color: transparent;
+  display: flex;
+  gap: 5px;
+}
+
+.add-project-button.closed {
+  display: none;
+}
+
+.button-project:hover,
+.default-project-button:hover,
+.add-project-button:hover,
+#button-add-todo:hover {
+  background-color: rgb(68, 61, 61);
+}
+
+/* sidebar end */
+
+/* main Content */
+
+.mainContent {
+  background-color: var(--background-even-more-light);
+  width: 100%;
+  padding: 20px 40px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+}
+
+.mainContent #todo-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+#button-add-todo {
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 5px;
+  background-color: transparent;
+  display: flex;
+  gap: 5px;
+}
+
+#button-add-todo.closed {
+  display: none;
+}
+
+#add-todo-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  margin-top: 20px;
+  display: none;
+}
+
+#add-todo-popup.active {
+  display: block;
+}
+
+input#add-todo-popup-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.add-todo-popup-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#button-add-todo-popup,
+#button-cancel-todo-popup {
+  width: 45%;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+#button-add-todo-popup {
+  background-color: #4ade80;
+}
+
+#button-cancel-todo-popup {
+  background-color: red;
+}
+
+.todo-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 5px;
+  background-color: inherit;
+}
+.todo-button:hover {
+  background-color: rgb(68, 61, 61);
+}
+
+.left-todo-div {
+  display: flex;
+  gap: 5px;
+}
+.right-todo-div {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.right-todo-div .rightDiv-details {
+  margin-right: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #3ba395;
+  border-radius: 3px;
+  font-size: 1rem;
+  color: #3ba395;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.right-todo-div .todo-change-details:hover {
+  color: #3aa394;
+}
+
+.right-todo-div .rightDiv-details:hover {
+  background-color: #3ba395;
+  color: white;
+}
+
+.right-todo-div .fa-trash-can:hover {
+  color: #3aa394;
+}
+
+.right-todo-div i {
+  visibility: hidden;
+}
+
+.todo-button:hover i {
+  visibility: visible;
+}
+/* main Content end */
+
+/* footer */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--background-dark-light);
+  color: var(--head-text);
+  font-size: 18px;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a,
+.footer a:visited,
+.footer a:hover,
+.footer a:active {
+  color: var(--head-text);
+} /* Unvisited link  */
+
+.fa-github {
+  color: var(--primary-light);
+  font-size: 22px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: scale(1.9);
+}
+
+@media (max-width: 550px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar {
+    position: relative;
+    z-index: 2;
+  }
+
+  .todo-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-radius: 5px;
+    gap: 1rem;
+    background-color: inherit;
+  }
+  .todo-button:focus,
+  .todo-button:active {
+    background-color: rgb(68, 61, 61);
+  }
+
+  .left-todo-div {
+    display: flex;
+    gap: 5px;
+  }
+  .right-todo-div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .right-todo-div i {
+    visibility: visible;
+  }
+}

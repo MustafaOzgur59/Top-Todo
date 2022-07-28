@@ -1,4 +1,4 @@
 import Home from "./modules/Home";
-import "style.css";
+import "./style.css";
 
 Home.loadHomePage();

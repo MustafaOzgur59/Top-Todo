@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 import Project from "./Project";
-import { isToday, isThisWeek } from "date-fns";
+import { isToday, isThisWeek, parseISO } from "date-fns";
 
 export default class TodoList {
   constructor() {
@@ -42,7 +42,7 @@ export default class TodoList {
     );
   }
 
-  updateTodayProjectLocal() {
+  updateToday() {
     this.getProject("Today").todos = [];
 
     const tempTodos = [];
@@ -56,7 +56,7 @@ export default class TodoList {
         return;
       } else {
         project.todos.forEach((todo) => {
-          if (isToday(todo.getDate())) {
+          if (isToday(parseISO(todo.getDate()))) {
             tempTodos.push(todo);
           }
         });
@@ -79,7 +79,7 @@ export default class TodoList {
         return;
       } else {
         project.todos.forEach((todo) => {
-          if (isThisWeek(todo.getDate())) {
+          if (isThisWeek(parseISO(todo.getDate()))) {
             tempTodos.push(todo);
           }
         });

@@ -1,7 +1,7 @@
-import TodoList from "../TodoList";
-import Todo from "../Todo";
-import Project from "../Project";
-import LocalStorage from "../LocalStorage";
+import TodoList from "./TodoList";
+import Todo from "./Todo";
+import Project from "./Project";
+import LocalStorage from "./LocalStorage";
 import { add } from "date-fns";
 import {
   renderAddTodoOverlay,

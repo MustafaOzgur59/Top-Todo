@@ -31,12 +31,16 @@ class Todo {
     return this.dueDate;
   }
 
-  setDetails(newDetails) {
+  setDescription(newDetails) {
     this.details = newDetails;
   }
 
-  getDetails() {
+  getDescription() {
     return this.details;
+  }
+
+  getPriority() {
+    return this.priority;
   }
 
   setPriority(newPriority) {

@@ -2,7 +2,7 @@ import TodoList from "./TodoList";
 import Todo from "./Todo";
 import Project from "./Project";
 import LocalStorage from "./LocalStorage";
-import { add } from "date-fns";
+
 import {
   renderAddTodoOverlay,
   renderDetailsOverlay,
@@ -163,6 +163,7 @@ export default class Home {
     const leftSpan = document.createElement("span");
 
     const rightDiv = document.createElement("div");
+
     const rightI = document.createElement("i");
 
     projectButton.classList.add(
@@ -178,8 +179,9 @@ export default class Home {
     rightI.classList.add("fas", "fa-times");
     rightDiv.append(rightI);
 
-    rightI.addEventListener("click", () => {
+    rightI.addEventListener("click", (e) => {
       this.handleDeleteProject(projectName);
+      e.stopPropagation();
     });
 
     projectButton.append(leftDiv, rightDiv);
@@ -335,10 +337,6 @@ export default class Home {
     cancelTodoButtonPopup.addEventListener("click", this.closeAddTodopopup);
     todoPopupInput.addEventListener("keypress", this.handleAddTodoInput);
   }
-
-  // static openTodoAddPopup() {
-  //   renderAddTodoOverlay();
-  // }
 
   static closeAddTodopopup() {
     const popup = document.getElementById("add-todo-popup");

@@ -89,6 +89,7 @@ export default class TodoList {
   }
 
   updateAll() {
+    console.log(this.getProject("All Todos"));
     this.getProject("All Todos").todos = [];
 
     const tempTodos = [];

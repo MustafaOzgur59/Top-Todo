@@ -242,8 +242,7 @@ body {
 /* sidebar */
 .sidebar {
   background-color: var(--background-light);
-  width: 300px;
-  min-width: 250px;
+  min-width: 300px;
   padding: 10px;
   transition: all 300ms ease;
 }
@@ -280,11 +279,11 @@ body {
   gap: 5px;
 }
 
-.project-button-right {
+.project-button-right .fa-times {
   display: none;
 }
 
-.user-project-button:hover .project-button-right {
+.user-project-button:hover .fa-times {
   display: block;
 }
 

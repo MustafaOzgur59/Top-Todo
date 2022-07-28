@@ -20,7 +20,11 @@ class Project {
     this.todos = newTodos;
   }
 
-  contains(todoName) {
+  getTodo(todoName) {
+    return this.todos.find((todo) => todo.getName() == todoName);
+  }
+
+  containsTodo(todoName) {
     return this.todos.some((todo) => todo.getName() === todoName);
   }
 

@@ -65,7 +65,7 @@ export default class TodoList {
     this.getProject("Today").setTodos(tempTodos);
   }
 
-  updateWeekProjectLocal() {
+  updateThisWeek() {
     this.getProject("This Week").todos = [];
 
     const tempTodos = [];
@@ -88,7 +88,7 @@ export default class TodoList {
     this.getProject("This Week").setTodos(tempTodos);
   }
 
-  updateAllProjectLocal() {
+  updateAll() {
     this.getProject("All Todos").todos = [];
 
     const tempTodos = [];

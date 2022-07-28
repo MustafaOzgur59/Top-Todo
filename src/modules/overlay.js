@@ -318,15 +318,20 @@ function editTodoHandler(
     priority.textContent
   );
 
+  console.log("Changed Todo: ", todo1);
+
   const todoList = LocalStorage.getTodoList();
   const projectIndex = todoList.projects.indexOf(
     todoList.getProject(projectName),
     0
   );
+  console.log("Project index: ", projectIndex);
   const todoIndex = todoList.projects[projectIndex].todos.indexOf(
     todoList.getProject(projectName).getTodo(todo.getName()),
     0
   );
+
+  console.log("Todo index :", todoIndex);
   todoList.projects[projectIndex].todos[todoIndex] = todo1;
   LocalStorage.setTodoList(todoList);
   Home.loadTodosforProject(projectName);

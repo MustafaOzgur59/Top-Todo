@@ -76,6 +76,15 @@ class LocalStorage {
     LocalStorage.setTodoList(todoList);
   }
 
+  static checkTodo(todo) {
+    const todoList = LocalStorage.getTodoList();
+    todoList
+      .getProject(todo.getProjectName())
+      .getTodo(todo.getName())
+      .setChecked(!todo.getChecked());
+    LocalStorage.setTodoList(todoList);
+  }
+
   static updateTodayLocal() {
     const todoList = LocalStorage.getTodoList();
     todoList.updateToday();

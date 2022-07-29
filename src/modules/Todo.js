@@ -5,6 +5,7 @@ class Todo {
     this.details = details;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.checked = false;
   }
 
   setName(newName) {
@@ -45,6 +46,14 @@ class Todo {
 
   setPriority(newPriority) {
     this.priority = newPriority;
+  }
+
+  getChecked() {
+    return this.checked;
+  }
+
+  setChecked(newChecked) {
+    this.checked = newChecked;
   }
 }
 

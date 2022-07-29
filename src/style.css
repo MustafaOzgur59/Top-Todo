@@ -358,6 +358,7 @@ input {
 .add-project-button:hover,
 #button-add-todo:hover {
   background-color: rgb(68, 61, 61);
+  color: white;
 }
 
 /* sidebar end */
@@ -378,7 +379,7 @@ input {
 .mainContent #todo-list {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
   gap: 5px;
 }
 
@@ -398,49 +399,6 @@ input {
   display: none;
 }
 
-#add-todo-popup {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  margin-top: 20px;
-  display: none;
-}
-
-#add-todo-popup.active {
-  display: block;
-}
-
-input#add-todo-popup-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.add-todo-popup-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-#button-add-todo-popup,
-#button-cancel-todo-popup {
-  width: 45%;
-  font-size: 20px;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-#button-add-todo-popup {
-  background-color: #4ade80;
-}
-
-#button-cancel-todo-popup {
-  background-color: red;
-}
-
 .todo-button {
   display: flex;
   justify-content: space-between;
@@ -450,8 +408,13 @@ input#add-todo-popup-input {
   border-radius: 5px;
   background-color: inherit;
 }
+.todo-button.complete {
+  text-decoration: line-through;
+}
+
 .todo-button:hover {
   background-color: rgb(68, 61, 61);
+  color: white;
 }
 
 .left-todo-div {

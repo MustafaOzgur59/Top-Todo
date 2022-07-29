@@ -276,9 +276,9 @@ export default class Home {
   static loadTodosforProject(projectName) {
     const mainDiv = document.querySelector(".mainContent");
     mainDiv.innerHTML = "";
-    const [header, todoListContainer, addTodoButton, addTodoPopup] =
+    const [header, todoListContainer, addTodoButton] =
       this.getTodoListDiv(projectName);
-    mainDiv.append(header, todoListContainer, addTodoButton, addTodoPopup);
+    mainDiv.append(header, todoListContainer, addTodoButton);
     this.initaddTodoButtons();
   }
 
@@ -297,54 +297,13 @@ export default class Home {
         <i class="fas fa-plus"></i>
         Add Todo
     `;
-    const addTodoPopup = document.createElement("div");
-    addTodoPopup.classList.add("add-todo-popup");
-    addTodoPopup.id = "add-todo-popup";
 
-    const popupInput = document.createElement("input");
-    popupInput.classList.add("add-todo-popup-input");
-    popupInput.id = "add-todo-popup-input";
-    popupInput.type = "text";
-
-    addTodoPopup.appendChild(popupInput);
-
-    const popupButtons = document.createElement("div");
-    popupButtons.classList.add("add-todo-popup-buttons");
-    const addButton = document.createElement("button");
-    addButton.innerText = "Add";
-    addButton.classList.add("button-add-todo-popup");
-    addButton.id = "button-add-todo-popup";
-    const cancelButton = document.createElement("button");
-    cancelButton.innerText = "Cancel";
-    cancelButton.classList.add("button-cancel-todo-popup");
-    cancelButton.id = "button-cancel-todo-popup";
-
-    popupButtons.append(addButton, cancelButton);
-    addTodoPopup.appendChild(popupButtons);
-
-    return [projectHeader, todoListContainer, addTodoButton, addTodoPopup];
+    return [projectHeader, todoListContainer, addTodoButton];
   }
 
   static initaddTodoButtons() {
     const addTodoButton = document.getElementById("button-add-todo");
-    const addTodoButtonPopup = document.getElementById("button-add-todo-popup");
-    const cancelTodoButtonPopup = document.getElementById(
-      "button-cancel-todo-popup"
-    );
-    const todoPopupInput = document.getElementById("add-todo-popup-input");
     addTodoButton.addEventListener("click", renderAddTodoOverlay);
-    addTodoButtonPopup.addEventListener("click", this.addTodo);
-    cancelTodoButtonPopup.addEventListener("click", this.closeAddTodopopup);
-    todoPopupInput.addEventListener("keypress", this.handleAddTodoInput);
-  }
-
-  static closeAddTodopopup() {
-    const popup = document.getElementById("add-todo-popup");
-    popup.classList.remove("active");
-    const addTodoButton = document.getElementById("button-add-todo");
-    addTodoButton.classList.remove("closed");
-    const popupInput = document.getElementById("add-todo-popup-input");
-    popupInput.value = "";
   }
 
   static addTodo() {
@@ -376,6 +335,8 @@ export default class Home {
 
     const todoButton = document.createElement("button");
     todoButton.classList.add("todo-button");
+
+    console.log(todo.getName(), todo.getChecked());
     todoButton.id = "todo-button";
 
     const leftDiv = document.createElement("div");
@@ -419,7 +380,18 @@ export default class Home {
       renderDetailsOverlay(event, todo);
     });
 
+    if (todo.getChecked()) {
+      todoButton.classList.add("complete");
+      leftI.classList.toggle("fa-clipboard-list");
+      leftI.classList.toggle("fa-clipboard-check");
+    }
     todoButton.append(leftDiv, rightDiv);
+    todoButton.addEventListener("click", () => {
+      todoButton.classList.toggle("complete");
+      leftI.classList.toggle("fa-clipboard-list");
+      leftI.classList.toggle("fa-clipboard-check");
+      LocalStorage.checkTodo(todo);
+    });
     todoList.appendChild(todoButton);
   }
 
@@ -454,5 +426,9 @@ export default class Home {
           Home.createTodo(todo);
         });
     }
+  }
+
+  static updataProjectTodoCounts() {
+    //TODO: after a project is added or after a todo is added to a project update the counts
   }
 }

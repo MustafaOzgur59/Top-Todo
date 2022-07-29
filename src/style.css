@@ -211,6 +211,7 @@ body {
   color: var(--head-text);
   background-color: #f18081;
   padding: 10px;
+  height: 8vh;
 }
 
 .header > .logo {
@@ -235,7 +236,7 @@ body {
 }
 
 .container {
-  height: calc(100vh - 89px - 44px);
+  height: 87vh;
   display: flex;
 }
 
@@ -272,9 +273,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 5px;
+  background-color: transparent;
+  display: flex;
+  gap: 5px;
+}
+
+.default-project-button .todoCount {
+  display: flex;
+  gap: 5px;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.default-project-button .todoCount .fa-times {
+  display: none;
+  visibility: hidden;
+}
+
+.default-project-button:hover .todoCount .fa-times {
+  display: block;
 }
 
 .project-button-left {
+  display: flex;
+  gap: 5px;
+}
+.project-button-right {
   display: flex;
   gap: 5px;
 }
@@ -475,6 +505,7 @@ input {
   background-color: var(--background-dark-light);
   color: var(--head-text);
   font-size: 18px;
+  height: 5vh;
 }
 
 .footer a {
@@ -505,9 +536,26 @@ input {
     justify-content: space-between;
   }
 
+  .header .logo {
+    font-size: 15px;
+  }
+
+  .header .closeMenu {
+    width: 10px;
+    font-size: 20px;
+  }
+  .container {
+    flex-direction: column;
+  }
+
+  .mainContent {
+    height: 100%;
+  }
+
   .sidebar {
     position: relative;
     z-index: 2;
+    width: 100%;
   }
 
   .todo-button {
@@ -520,6 +568,22 @@ input {
     border-radius: 5px;
     gap: 1rem;
     background-color: inherit;
+  }
+
+  .create-new-todo .create-todo-priority-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .create-new-todo .create-todo-priority-div button {
+    margin: 0 0.3rem;
+  }
+
+  .create-todo-add-button {
+    margin-top: 0.5rem;
+    justify-self: center;
+    align-self: flex-start;
   }
   .todo-button:focus,
   .todo-button:active {

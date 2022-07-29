@@ -175,8 +175,12 @@ function addTodoHandler(todoName, projectName, details, dueDate, priority) {
 
   LocalStorage.addTodo(todo1, projectName);
   Home.createTodo(todo1);
+  LocalStorage.updateAllLocal();
+  LocalStorage.updateTodayLocal();
+  LocalStorage.updateWeekLocal();
   document.querySelector(".overlay").classList.toggle("overlay-visible");
   document.querySelector(".overlay").innerHTML = "";
+  Home.updataProjectTodoCounts();
 }
 
 function renderEditTodoOverlay(todo) {

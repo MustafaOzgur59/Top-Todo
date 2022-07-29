@@ -6,8 +6,8 @@ export default class TodoList {
   constructor() {
     this.projects = [];
     this.projects.push(new Project("Today"));
-    this.projects.push(new Project("This Week"));
-    this.projects.push(new Project("All Todos"));
+    this.projects.push(new Project("Week"));
+    this.projects.push(new Project("All"));
   }
 
   setProjects(newProjects) {
@@ -50,8 +50,8 @@ export default class TodoList {
     this.projects.forEach((project) => {
       if (
         project.getName() === "Today" ||
-        project.getName() === "This Week" ||
-        project.getName() === "All Todos"
+        project.getName() === "Week" ||
+        project.getName() === "All"
       ) {
         return;
       } else {
@@ -66,15 +66,15 @@ export default class TodoList {
   }
 
   updateThisWeek() {
-    this.getProject("This Week").todos = [];
+    this.getProject("Week").todos = [];
 
     const tempTodos = [];
 
     this.projects.forEach((project) => {
       if (
         project.getName() === "Today" ||
-        project.getName() === "This Week" ||
-        project.getName() === "All Todos"
+        project.getName() === "Week" ||
+        project.getName() === "All"
       ) {
         return;
       } else {
@@ -85,20 +85,19 @@ export default class TodoList {
         });
       }
     });
-    this.getProject("This Week").setTodos(tempTodos);
+    this.getProject("Week").setTodos(tempTodos);
   }
 
   updateAll() {
-    console.log(this.getProject("All Todos"));
-    this.getProject("All Todos").todos = [];
+    this.getProject("All").todos = [];
 
     const tempTodos = [];
 
     this.projects.forEach((project) => {
       if (
         project.getName() === "Today" ||
-        project.getName() === "This Week" ||
-        project.getName() === "All Todos"
+        project.getName() === "Week" ||
+        project.getName() === "All"
       ) {
         return;
       } else {
@@ -107,6 +106,6 @@ export default class TodoList {
         });
       }
     });
-    this.getProject("All Todos").setTodos(tempTodos);
+    this.getProject("All").setTodos(tempTodos);
   }
 }

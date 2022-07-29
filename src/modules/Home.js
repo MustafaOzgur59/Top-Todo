@@ -49,16 +49,30 @@ export default class Home {
       <div id="mainProjects">
           <h2>Main Projects</h2>
           <button class="default-project-button" id="today-projects-button">
-            <i class="fas fa-calendar-day" aria-hidden="true"></i>
+          <i class="fas fa-calendar-day" aria-hidden="true"></i>
             Today
-          </button>
+            <div class="todoCount">
+              ${
+                LocalStorage.getTodoList().getProject("Today").getTodos().length
+              }
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </div>
+            </button>
           <button class="default-project-button" id="week-projects-button">
             <i class="fas fa-calendar-week" aria-hidden="true"></i>
-            This week
+            Week
+            <div class="todoCount">
+            ${LocalStorage.getTodoList().getProject("Week").getTodos().length}
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </div>
           </button>
           <button class="default-project-button" id="all-projects-button">
             <i class="fa-solid fa-border-all"></i>
             All
+            <div class="todoCount">
+            ${LocalStorage.getTodoList().getProject("All").getTodos().length}
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </div>
           </button>
       </div>
       <div id="userProjects">
@@ -97,9 +111,9 @@ export default class Home {
       .addEventListener("click", () => {
         LocalStorage.updateWeekLocal();
         console.log("Week");
-        this.loadTodosforDefaultProjects("This Week");
+        this.loadTodosforDefaultProjects("Week");
         LocalStorage.getTodoList()
-          .getProject("This Week")
+          .getProject("Week")
           .getTodos()
           .forEach((todo) => {
             Home.createTodo(todo);
@@ -109,10 +123,10 @@ export default class Home {
       .querySelector("#all-projects-button")
       .addEventListener("click", () => {
         LocalStorage.updateAllLocal();
-        console.log("All Todos");
-        this.loadTodosforDefaultProjects("All Todos");
+        console.log("All");
+        this.loadTodosforDefaultProjects("All");
         LocalStorage.getTodoList()
-          .getProject("All Todos")
+          .getProject("All")
           .getTodos()
           .forEach((todo) => {
             Home.createTodo(todo);
@@ -125,8 +139,8 @@ export default class Home {
       .forEach((project) => {
         if (
           project.getName() !== "Today" &&
-          project.getName() !== "This Week" &&
-          project.getName() !== "All Todos"
+          project.getName() !== "Week" &&
+          project.getName() !== "All"
         ) {
           Home.getProjectButton(project.getName(), "userProjects");
         }
@@ -163,13 +177,14 @@ export default class Home {
     const leftSpan = document.createElement("span");
 
     const rightDiv = document.createElement("div");
-
+    const todoCount = document.createElement("div");
+    todoCount.textContent = LocalStorage.getTodoList()
+      .getProject(projectName)
+      .getTodos().length;
+    todoCount.classList.add("todo-count");
     const rightI = document.createElement("i");
 
-    projectButton.classList.add(
-      "default-project-button",
-      "user-project-button"
-    );
+    projectButton.classList.add("user-project-button");
     leftDiv.classList.add("project-button-left");
     leftI.classList.add("fa-solid", "fa-list-check");
     leftSpan.textContent = projectName;
@@ -177,7 +192,7 @@ export default class Home {
 
     rightDiv.classList.add("project-button-right");
     rightI.classList.add("fas", "fa-times");
-    rightDiv.append(rightI);
+    rightDiv.append(todoCount, rightI);
 
     rightI.addEventListener("click", (e) => {
       this.handleDeleteProject(projectName);
@@ -241,6 +256,7 @@ export default class Home {
     LocalStorage.addProject(new Project(projectName));
     Home.getProjectButton(projectName, "userProjects");
     Home.closeAddProjectPopup();
+    Home.updataProjectTodoCounts();
   }
 
   static closeAddProjectPopup() {
@@ -256,6 +272,7 @@ export default class Home {
   static handleAddProjectPopupInput(event) {
     if (event.key === "Enter") {
       Home.addProject();
+      Home.updataProjectTodoCounts();
     }
   }
 
@@ -303,7 +320,9 @@ export default class Home {
 
   static initaddTodoButtons() {
     const addTodoButton = document.getElementById("button-add-todo");
-    addTodoButton.addEventListener("click", renderAddTodoOverlay);
+    addTodoButton.addEventListener("click", () => {
+      renderAddTodoOverlay();
+    });
   }
 
   static addTodo() {
@@ -404,8 +423,8 @@ export default class Home {
 
     if (
       projectName === "Today" ||
-      projectName === "This Week" ||
-      projectName === "All Todos"
+      projectName === "Week" ||
+      projectName === "All"
     ) {
       LocalStorage.deleteTodo(todo.getName(), todo.getProjectName());
       LocalStorage.deleteTodo(todo.getName(), projectName);
@@ -430,5 +449,27 @@ export default class Home {
 
   static updataProjectTodoCounts() {
     //TODO: after a project is added or after a todo is added to a project update the counts
+    console.log("Shiiet");
+    const userProjectbuttons = document.querySelectorAll(
+      ".user-project-button"
+    );
+    const defaultProjectButtons = document.querySelectorAll(
+      ".default-project-button"
+    );
+
+    console.log(defaultProjectButtons);
+    defaultProjectButtons.forEach((node) => {
+      console.log(node.childNodes[2].textContent.trim());
+      node.childNodes[3].childNodes[0].textContent = LocalStorage.getTodoList()
+        .getProject(node.childNodes[2].textContent.trim())
+        .getTodos().length;
+    });
+
+    console.log(userProjectbuttons);
+    userProjectbuttons.forEach((node) => {
+      node.childNodes[1].childNodes[0].textContent = LocalStorage.getTodoList()
+        .getProject(node.childNodes[0].childNodes[1].childNodes[0].textContent)
+        .getTodos().length;
+    });
   }
 }

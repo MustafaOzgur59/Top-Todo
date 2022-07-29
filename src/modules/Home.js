@@ -196,6 +196,7 @@ export default class Home {
 
     rightI.addEventListener("click", (e) => {
       this.handleDeleteProject(projectName);
+      Home.updataProjectTodoCounts();
       e.stopPropagation();
     });
 
@@ -393,6 +394,7 @@ export default class Home {
 
     rightI2.addEventListener("click", () => {
       Home.handleDeleteTodo(todo);
+      Home.updataProjectTodoCounts();
     });
 
     details.addEventListener("click", (event) => {
@@ -449,7 +451,10 @@ export default class Home {
 
   static updataProjectTodoCounts() {
     //TODO: after a project is added or after a todo is added to a project update the counts
-    console.log("Shiiet");
+    LocalStorage.updateAllLocal();
+    LocalStorage.updateTodayLocal();
+    LocalStorage.updateWeekLocal();
+
     const userProjectbuttons = document.querySelectorAll(
       ".user-project-button"
     );

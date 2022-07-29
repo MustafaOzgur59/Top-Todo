@@ -345,8 +345,12 @@ function editTodoHandler(
     .forEach((todo) => {
       Home.createTodo(todo);
     });
+  LocalStorage.updateAllLocal();
+  LocalStorage.updateTodayLocal();
+  LocalStorage.updateWeekLocal();
   document.querySelector(".overlay").classList.toggle("overlay-visible");
   document.querySelector(".overlay").innerHTML = "";
+  Home.updataProjectTodoCounts();
 }
 
 export { renderDetailsOverlay, renderAddTodoOverlay, renderEditTodoOverlay };

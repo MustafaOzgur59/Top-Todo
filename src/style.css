@@ -438,8 +438,14 @@ input {
   border-radius: 5px;
   background-color: inherit;
 }
-.todo-button.complete {
+.todo-button .todo-name.complete {
   text-decoration: line-through;
+  text-decoration-color: black;
+}
+
+.due-date.complete {
+  text-decoration: line-through;
+  text-decoration-color: black;
 }
 
 .todo-button:hover {

@@ -399,16 +399,20 @@ export default class Home {
 
     details.addEventListener("click", (event) => {
       renderDetailsOverlay(event, todo);
+      event.stopPropagation();
     });
 
     if (todo.getChecked()) {
-      todoButton.classList.add("complete");
+      todoP.classList.toggle("complete");
+      dueDate.classList.toggle("complete");
+      console.log("wtf");
       leftI.classList.toggle("fa-clipboard-list");
       leftI.classList.toggle("fa-clipboard-check");
     }
     todoButton.append(leftDiv, rightDiv);
     todoButton.addEventListener("click", () => {
-      todoButton.classList.toggle("complete");
+      todoP.classList.toggle("complete");
+      dueDate.classList.toggle("complete");
       leftI.classList.toggle("fa-clipboard-list");
       leftI.classList.toggle("fa-clipboard-check");
       LocalStorage.checkTodo(todo);
